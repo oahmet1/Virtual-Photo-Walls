@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+
 interface ILayoutAlgorithm {
     Layout GenerateLayout(Photograph[] photos, Wall wall, int NumberofPhotosEachWall, int AlgorithmParameter);
 }
@@ -25,7 +26,7 @@ class NoOverlapRandomLayoutAlgorithm : ILayoutAlgorithm {
             }
             float x = boundsX[0]+width + (float) rnd.NextDouble() * (-boundsX[0] + boundsX[1] - 2*width);
             float y = boundsY[0]+height + (float)rnd.NextDouble() * (-boundsY[0] + boundsY[1] - 2*height);
-            photos[i].SetPosition(x, y, 0.1f);
+            photos[i].SetPosition(x, y, 0.01f);
 
             bool valid = true;
             for (int j=0; j<i; j++){
@@ -35,7 +36,7 @@ class NoOverlapRandomLayoutAlgorithm : ILayoutAlgorithm {
             }
             if (valid){
                 Photograph copy = photos[i].createCopy();
-                copy.SetPosition(x, y, 0.1f);
+                copy.SetPosition(x, y, 0.01f);
                 displayedPhotos.Add(copy);
             }
         }
@@ -57,7 +58,7 @@ class LayoutAlgorithm : ILayoutAlgorithm {
             // ToDo: some positions on the circle might need to be skipped
             int randomPhotoIndex = Random.Range(0, numPhotos);
             Photograph nextPhoto = photos[randomPhotoIndex % numPhotos].createCopy();
-            nextPhoto.SetPosition(x, y, 0.1f);
+            nextPhoto.SetPosition(x, y, 0.01f);
             float moveX = 0;
             float moveY = 0;
             bool validPlacementFound = true;
@@ -105,7 +106,7 @@ class LayoutAlgorithm : ILayoutAlgorithm {
                     }
                 }
             }
-            nextPhoto.SetPosition(x + moveX, y + moveY, 0.1f);
+            nextPhoto.SetPosition(x + moveX, y + moveY, 0.01f);
             if (!validPlacementFound || !wall.photoIsInsideWall(nextPhoto, new float[]{0.25f, 0.25f, 0.25f, 0.25f})){
                 continue;
             }
@@ -143,7 +144,7 @@ class LayoutAlgorithm : ILayoutAlgorithm {
     }
 
     public void DisplayAPhoto(ArrayList displayedPhotos, ArrayList notDisplayedPhotos, Photograph p , float centerX, float centerY){
-        p.SetPosition(centerX, centerY, 0.1f);
+        p.SetPosition(centerX, centerY, 0.01f);
         displayedPhotos.Add(p.createCopy());
         notDisplayedPhotos.Remove(p);
     }
