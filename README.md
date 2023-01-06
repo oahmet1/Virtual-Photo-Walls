@@ -24,3 +24,4 @@ Photo-wall Generation on HoloLens.
     - Your Scripts are under Assembly-CSharp → Assets → Scripts
     - You can use your newly generated solution in your cloning directory to start development. 
 9. From Scenes select SampleScene. Click Run or Deploy it directly to hololens using the build instructions.
+10. To deploy the app on HoloLens check "Pictures Library Read Permissions" from the Unity Project Settings/Player/Publishing Settings/Capabilities. Note that the images are loaded from the Assets/Images folder when running the application in the Unity Player and from the Camera Roll folder on when it is deployed to HoloLens 2.
